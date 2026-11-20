@@ -1,11 +1,10 @@
 pipeline {
     agent any
 
-    tools{
-        jdk 'JDK 25'
-        maven 'Maven-3.10'
-    }
-
+    tools {
+    jdk 'jdk25'
+    maven 'maven3'
+}
     stages {
         stage('SCM Synchronization') {
             steps {
