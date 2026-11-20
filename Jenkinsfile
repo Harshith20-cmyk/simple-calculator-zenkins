@@ -13,12 +13,15 @@ pipeline {
             }
         }
 
-        stage('Static Verification') {
-            steps {
-                echo '🔍 Checking Maven project layout rules...'
-                bat 'mvn validate'
-            }
-        }
+       stage('Static Verification') {
+    steps {
+        echo '🔍 Checking Maven project layout rules...'
+
+        bat 'powershell -NoProfile -Command "$p=Join-Path (Get-Location) pom.xml; $c=[IO.File]::ReadAllText($p); $c=$c.TrimStart([char]13,[char]10); [IO.File]::WriteAllText($p,$c,[Text.UTF8Encoding]::new($false))"'
+
+        bat 'mvn validate'
+    }
+}
 
         stage('Compilation & Automated Testing') {
             steps {
